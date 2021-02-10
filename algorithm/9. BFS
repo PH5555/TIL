@@ -11,3 +11,74 @@
 
 1번, 2번을 반복
 
+# 미로문제(백준 2178)
+
+```java
+
+package Study;
+
+import java.io.*;
+import java.util.*;
+
+class Node {
+	public int n;
+	public int m;
+	
+	Node(int n, int m) {
+		this.n = n;
+		this.m = m;
+	}
+}
+
+public class codeUp_4011 {
+	
+	static int N,M;
+	static int[][] arr;
+	static boolean[][] check;
+	static int cnt = 1;
+	static int[][] dir = {{-1,0},{1,0},{0,-1},{0,1}}; 
+	
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		N = sc.nextInt();
+		M = sc.nextInt();
+		
+		arr = new int[N][M];
+		check = new boolean[N][M];
+		
+		for(int i = 0; i < N; i++) {
+			String s = sc.next();
+			
+			for(int j = 0; j < M; j++) {
+				arr[i][j] = s.charAt(j) - '0';
+			}
+		}
+		bfs();
+		System.out.println(arr[N-1][M-1]);
+	}
+	
+	public static void bfs() {
+		Queue<Node> q = new LinkedList<Node>();
+		q.offer(new Node(0,0));
+		check[0][0] = true;
+		
+		while(!q.isEmpty()) {
+			Node temp = q.poll();
+			for(int i = 0; i < 4; i++) {
+				int n = temp.n + dir[i][0];
+				int m = temp.m + dir[i][1];
+				if(n >= 0 && n < N && m >= 0 && m < M) {
+					if(check[n][m] == false && arr[n][m] != 0) {
+						q.offer(new Node(n,m));
+						check[n][m] = true;
+						arr[n][m] = arr[temp.n][temp.m] + 1;
+					}
+				}
+			}
+		}
+	}
+}
+
+
+```
+
