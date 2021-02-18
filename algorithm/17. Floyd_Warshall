@@ -1,0 +1,52 @@
+# 플로이드 와샬 알고리즘
+
+- 모든 정점에서 모든 정점으로 가는 최소비용
+
+# 코드
+
+```c
+
+#include <stdio.h>
+
+int number = 4;
+int INF = 10000000;
+int a[4][4] = {
+	{0,5,INF,8},
+	{7,0,9,INF},
+	{2,INF,0,4},
+	{INF,INF,3,0}
+};
+
+void f(){
+	int d[number][number];
+	int i, j, k;
+	for(i = 0; i < number; i++){
+		for(j = 0; j < number; j++){
+			d[i][j] = a[i][j];
+		}
+	}
+	
+	for(i = 0; i < number; i++){
+		for(j = 0; j < number; j++){
+			for(k = 0; k < number; k++){
+				if(d[j][k] > d[j][i] + a[i][k]) {
+					d[j][k] = d[j][i] + a[i][k];
+				}
+			}
+		}
+	}
+	
+	for(i = 0; i < number; i++){
+		for(j = 0; j < number; j++){
+			printf("%d ", d[i][j]); 
+		}
+		printf("\n");
+	}
+	
+}
+
+int main(){
+	f();
+}
+
+```
