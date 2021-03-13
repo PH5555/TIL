@@ -1,0 +1,40 @@
+# 상속
+
+- 공통점을 찾아 관리할 때 편리
+- 부모클래스를 슈퍼클래스, 자식클래스를 서브클래스라고 함
+
+```kotlin
+
+fun main() {
+    var a = Animal("흰둥이", 306, "개")
+    var b = Dog("검둥이", 34)
+    var c = Cat("흰둥이", 306)
+    
+    a.introduce()
+    b.introduce()
+    c.introduce()
+    
+    b.bark()
+    c.bark()
+}
+
+open class Animal(var name: String, var age: Int, var type: String){ //open을 해주어야 상속할 수 있다
+    fun introduce(){
+        println("${this.name}, ${this.age}살, ${this.type}")
+    }
+    
+}
+
+class Dog(name: String, age: Int): Animal(name, age, "개"){
+    fun bark(){
+        println("멍멍")
+    }
+}
+
+class Cat(name: String, age: Int): Animal(name, age, "고양이"){
+    fun bark(){
+        println("냐옹")
+    }
+}
+
+``` 
